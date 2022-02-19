@@ -1,6 +1,10 @@
+#' Contrast Checker Widget
+#'
+#' @return a color contrast checker
+#' @export
 contrast_checker <- function() {
-  html <- htmltools::tags$section(id = 'color-contrast', 
-    htmltools::tags$h1("Color Contrast Checker (C3)"),
+  html <- htmltools::tags$section(id = 'color-contrast',
+    htmltools::tags$h1("Color Contrast Checker"),
     htmltools::tags$div(id = 'boxes',
       htmltools::tags$div(id = 'aa-large',
         htmltools::tags$span("Large Text"),
@@ -21,14 +25,14 @@ contrast_checker <- function() {
     ),
     htmltools::tags$div(id = "sample",
       htmltools::tags$div(
-        contentenditable = 'true',
+        contenteditable = TRUE,
         id = 'sample-text',
         style="color:rgb(0,0,0);background:rgb(255,255,255)",
         "Click to change the demo text"
        )
     ),
     htmltools::tags$div(id = "bars",
-      htmltools::tags$div(
+      htmltools::tags$div(class="color-picker",
         htmltools::tags$h2("Foreground"),
         htmltools::tags$div(
           htmltools::tags$label(`for`= "color-1-r", class = "red","R"),
@@ -46,8 +50,8 @@ contrast_checker <- function() {
           htmltools::tags$input(id="number-1-b",type='number', min=0,max=225,value=0)
         ),
         htmltools::tags$input(id="color-1-hex", `data-target`='1',type='text',value='#000000',maxlength='7')
-      ),   
-      htmltools::tags$div(
+      ),
+      htmltools::tags$div(class="color-picker",
         htmltools::tags$h2("Background"),
         htmltools::tags$div(
           htmltools::tags$label(`for`= "color-2-r", class = "red","R"),
@@ -68,7 +72,7 @@ contrast_checker <- function() {
       )
     )
   )
-  
+
   deps <- htmltools::htmlDependency(
     name = "colorchecker",
     version = "0.1.0",
@@ -76,6 +80,6 @@ contrast_checker <- function() {
     script = "js/script.js",
     stylesheet = "css/styles.css"
   )
-  
+
   htmltools::tagList(html, deps)
 }
